@@ -14,6 +14,7 @@ var cookie = require('./cookie')
 var Github = require('github-api')
 var Gist = require('./github-gist.js')
 var uglify = require('uglify-js')
+var compile = require('es6-arrow-function').compile
 
 initialize()
 
@@ -252,6 +253,7 @@ function initialize() {
           loadingClass.add('hidden')
           sandbox.iframe.setHTML('<script type="text/javascript" src="embed-bundle.js"></script>')
         } else {
+          code = compile(code).code;
           sandbox.bundle(code, packagejson.dependencies)
         }
         
